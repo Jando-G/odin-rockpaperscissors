@@ -27,14 +27,35 @@ function strtonum(str) {
     }
 }
 function playRound(player, computer) {
-    console.log("a round was played");
-    return player - computer
+    return player - computer;
 }
+let Pcount = 0;
+let Ccount = 0;
+const PlayerPoints = document.querySelector('p[data-key="player"]');
+const ComputerPoints = document.querySelector('p[data-key="computer"]');
+const ResultBox = document.getElementById("result");
+const buttons = document.querySelectorAll('.selection');
+const PlayerChoice = document.getElementById("playerchoice");
+const ComputerChoice = document.getElementById("computerchoice");
 
-const buttons = document.querySelectorAll(".selection");
 buttons.forEach(item => {
     item.addEventListener('click', (e) => {
-        const result = playRound(strtonum(e.target.dataset.key), computerPlay());
-        console.log("result: " + result)
+        const computerChoice = computerPlay();
+        PlayerChoice.innerHTML = e.target.dataset.key;
+        ComputerChoice.innerHTML = numtostr(computerChoice);
+        const result = playRound(strtonum(e.target.dataset.key), computerChoice);
+        if(result == 0) {
+            ResultBox.innerHTML = "This round is a draw";
+        }
+        if(result == 1 || result == -2) {
+            ResultBox.innerHTML = "You win this round";
+            Pcount++;
+            PlayerPoints.innerHTML = Pcount;
+        }
+        if(result == -1 || result == 2) {
+            ResultBox.innerHTML = "The computer wins this round";
+            Ccount++;
+            ComputerPoints.innerHTML = Ccount;
+        }
     })
 })
