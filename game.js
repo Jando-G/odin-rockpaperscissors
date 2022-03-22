@@ -38,8 +38,12 @@ const buttons = document.querySelectorAll('.selection');
 const PlayerChoice = document.getElementById("playerchoice");
 const ComputerChoice = document.getElementById("computerchoice");
 
+function game(e) {
+    
+}
 buttons.forEach(item => {
     item.addEventListener('click', (e) => {
+        if(Pcount < 5 && Ccount < 5) {
         const computerChoice = computerPlay();
         PlayerChoice.innerHTML = e.target.dataset.key;
         ComputerChoice.innerHTML = numtostr(computerChoice);
@@ -56,6 +60,13 @@ buttons.forEach(item => {
             ResultBox.innerHTML = "The computer wins this round";
             Ccount++;
             ComputerPoints.innerHTML = Ccount;
+        }
+        if(Pcount > 4) {
+            ResultBox.innerHTML = "You win!";
+        }
+        if(Ccount > 4) {
+            ResultBox.innerHTML = "Computer wins :(";
+        }
         }
     })
 })
