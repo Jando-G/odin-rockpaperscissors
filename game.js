@@ -38,9 +38,15 @@ const buttons = document.querySelectorAll('.selection');
 const PlayerChoice = document.getElementById("playerchoice");
 const ComputerChoice = document.getElementById("computerchoice");
 
-function game(e) {
-    
-}
+document.getElementById("reset").addEventListener('click', (e) => {
+    Pcount = 0;
+    Ccount = 0;
+    PlayerPoints.innerHTML = Pcount;
+    ComputerPoints.innerHTML = Ccount;
+    ResultBox.innerHTML = "none";
+    PlayerChoice.innerHTML = "none";
+    ComputerChoice.innerHTML = "none";
+});
 buttons.forEach(item => {
     item.addEventListener('click', (e) => {
         if(Pcount < 5 && Ccount < 5) {
