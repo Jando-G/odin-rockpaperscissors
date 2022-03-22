@@ -27,41 +27,14 @@ function strtonum(str) {
     }
 }
 function playRound(player, computer) {
+    console.log("a round was played");
     return player - computer
 }
-function game() {
-    let player = 0
-    let computer = 0
-    let res = 0
-    let com = 0
-    console.log("Welcome to my Rock Paper Scissors BO5 game!")
-    while(player < 3 && computer < 3) {
-        let sel = prompt("Please make a selection", "rock")
-        sel = strtonum(sel)
-        com = computerPlay()
-        res = playRound(sel, com)
-        if(res == 1 || res == -2) {
-            player++
-            console.log(numtostr(sel) + " beats " + numtostr(com) + "! Player has " + player + " wins.")
-        }
-        else if(res == -1 || res == 2) {
-            computer++
-            console.log(numtostr(com) + " beats " + numtostr(sel) + "! Computer has " + computer + " wins.")
-        }
-        else if(res == 0) {
-            console.log(numtostr(sel) + " vs " + numtostr(com) + ". This round's a draw")
-        }
-        else {
-            console.log("invalid input")
-        }
-    }
 
-    if(player > computer) {
-        console.log("Player wins " + player + " to " + computer)
-    }
-    else {
-        console.log("Computer wins " + computer + " to " + player)
-    }
-}
-
-game()
+const buttons = document.querySelectorAll(".selection");
+buttons.forEach(item => {
+    item.addEventListener('click', (e) => {
+        const result = playRound(strtonum(e.target.dataset.key), computerPlay());
+        console.log("result: " + result)
+    })
+})
